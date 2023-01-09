@@ -1,6 +1,7 @@
 package com.shoppingmall.entity;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -21,7 +22,11 @@ public class Coupon {
     private String id;      // UUID
     private String couponName; // 쿠폰 이름
     private int discount; // 할인율 혹은 할인되는 가격
+
+    @Column(updatable = false)
+    @CreatedDate
     private LocalDateTime createdAt;
+
     // 세일 시작 시간 ~ 끝나는 시간
     private LocalDateTime startDt;
     private LocalDateTime endDt;

@@ -4,12 +4,21 @@ POST http://localhost:8081/coupon/issued
 Content-Type: application/json
 
 {
-    "userId": "user_16",
+    "userId": "user_18",
     "key": "coupon:time-attack:1:date-time:1:issued:users"
 }
 
 ###
-# 쿠폰 리스트 보기
-GET http://localhost:8081/coupon
+# 쿠폰 정책 리스트 보기 (coupon_info)
+GET http://localhost:8081/admin/coupon
 
 ###
+# 발급된 쿠폰 리스트 전체 보기 (user_coupon)
+GET http://localhost:8081/coupon/issued
+
+GET http://localhost:8081/test
+
+###
+# 특정 사용자에게 발급된 쿠폰 보기
+# GET http://localhost:8081/coupon/issued?userId={userId}
+GET http://localhost:8081/coupon/issued?userId=user_1

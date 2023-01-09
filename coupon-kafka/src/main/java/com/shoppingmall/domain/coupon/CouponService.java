@@ -79,5 +79,4 @@ Spring에서 컨테이너 팩토리는 KafkaListenerContainerFactory, Concurrent
         log.info("NotificationExpireCoupon > ConsumerRecord : {}" , String.valueOf(consumerRecord));
     }
 
-
 }

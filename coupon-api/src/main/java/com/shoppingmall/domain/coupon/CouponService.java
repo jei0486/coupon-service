@@ -7,7 +7,7 @@ import com.shoppingmall.dto.NotificationDto;
 import com.shoppingmall.dto.UserCouponResponseDto;
 import com.shoppingmall.entity.UserCoupon;
 import com.shoppingmall.enums.CouponStatus;
-import com.shoppingmall.repository.UserCouponRepositoryImpl;
+import com.shoppingmall.repository.UserCouponRepository;
 import com.shoppingmall.util.ModelMapperUtil;
 import com.shoppingmall.vo.TimeAttackVO;
 import com.shoppingmall.dto.TimeAttackRequestDto;
@@ -28,15 +28,14 @@ import java.util.stream.Collectors;
 @Service
 public class CouponService {
 
-    final TimeAttackOperation timeAttackOperation;
-    final RedisOperations<String,Object> redisOperation;
-    final KafkaService kafkaService;
+    private final TimeAttackOperation timeAttackOperation;
+    private final RedisOperations<String,Object> redisOperation;
+    private final KafkaService kafkaService;
+    private final UserCouponRepository userCouponRepository;
 
-    final UserCouponRepositoryImpl userCouponRepositoryImpl;
-
-    final ObjectMapper mapper;
-    final String successMsg = "success";
-    final String failMsg = "fail";
+    private final ObjectMapper mapper;
+    public static final String successMsg = "success";
+    public static final String failMsg = "fail";
 
     /**
      * 쿠폰 발행 (고객)
@@ -61,13 +60,13 @@ public class CouponService {
             result = timeAttackOperation.add(redisOperation, vo);
         }
 
-        log.info("result : {}",result == 1 ?successMsg : "fail :: key is Duplicate in Redis");
+        log.info("result : {}",result == 1 ? successMsg : "fail :: key is Duplicate in Redis");
 
         if (result == 1) {
             kafkaService.async("TimeAttackCouponIssue",mapper.writeValueAsString(dto));
             return successMsg;
         }else {
-            return failMsg;
+            return "fail :: key is Duplicate in Redis";
         }
 
     }
@@ -117,34 +116,37 @@ public class CouponService {
      * 만료 하루전
      * 특정_status와_특정_날짜_구간의_만료일에_해당하는_쿠폰_목록_조회
      * */
-//    public List<UserCouponResponseDto> findAllByEndDateBetweenToday(){
-//
-//        long afterDays = 1L;
-//        LocalDateTime afterNDays = LocalDateTime.now().plusDays(afterDays);
-//        LocalDateTime startDate = LocalDateTime.of(afterNDays.getYear(), afterNDays.getMonth(), afterNDays.getDayOfMonth(), 0, 0, 0);
-//        LocalDateTime endDate = LocalDateTime.of(afterNDays.getYear(), afterNDays.getMonth(), afterNDays.getDayOfMonth(), 23, 59, 59);
-//
-//        log.info("startDate : {} , endDate : {}",startDate,endDate);
-//
-//
-//
-//
-//        List<UserCoupon> userCouponList = userCouponRepositoryImpl.findAllByStatusAndEndDtBetween(CouponStatus.PUBLISHED,startDate,endDate);
-//
-//        log.info("userCouponEntityList : {}",String.valueOf(userCouponList));
-//
-//        // stream vs parallelStream
-////        return userCouponEntityList.stream()
-////                .map(UserCouponEntity::toResponseDto)
-////                .collect(Collectors.toList());
-//        List<UserCouponResponseDto> collect = new ArrayList<>();
-//
-//        if (!userCouponList.isEmpty()){
-//            collect = userCouponList.stream().map(entity -> ModelMapperUtil.map(entity,UserCouponResponseDto.class)).collect(Collectors.toList());
-//        }
-//
-//        return collect;
-//    }
+    public List<UserCouponResponseDto> findAllByEndDateBetweenToday(){
+
+        long afterDays = 1L;
+        LocalDateTime afterNDays = LocalDateTime.now().plusDays(afterDays);
+        LocalDateTime startDate = LocalDateTime.of(afterNDays.getYear(), afterNDays.getMonth(), afterNDays.getDayOfMonth(), 0, 0, 0);
+        LocalDateTime endDate = LocalDateTime.of(afterNDays.getYear(), afterNDays.getMonth(), afterNDays.getDayOfMonth(), 23, 59, 59);
+
+        log.info("==================================================");
+        log.info("startDate : {} , endDate : {}",startDate,endDate);
+        log.info("==================================================");
+
+
+        List<UserCoupon> userCouponList = userCouponRepository.findAllByStatusAndEndDtBetween(CouponStatus.PUBLISHED,startDate,endDate);
+
+        log.info("==================================================");
+        log.info("userCouponEntityList : {}",String.valueOf(userCouponList));
+        log.info("==================================================");
+
+        // stream vs parallelStream
+//        return userCouponEntityList.stream()
+//                .map(UserCouponEntity::toResponseDto)
+//                .collect(Collectors.toList());
+
+        List<UserCouponResponseDto> collect = new ArrayList<>();
+
+        if (!userCouponList.isEmpty()){
+            collect = userCouponList.stream().map(entity -> ModelMapperUtil.map(entity,UserCouponResponseDto.class)).collect(Collectors.toList());
+        }
+
+        return collect;
+    }
 
     public void publishNotification(List<UserCouponResponseDto> userCouponResponseDtoList){
 

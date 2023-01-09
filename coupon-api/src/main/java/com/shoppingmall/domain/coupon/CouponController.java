@@ -61,11 +61,11 @@ public class CouponController {
     /*
     * 테스트
     * */
-//    @GetMapping(value = "/test")
-//    public ResponseEntity<?> test(){
-//
-//        return ResponseEntity.ok().body(couponService.findAllByEndDateBetweenToday());
-//    }
+    @GetMapping(value = "/test")
+    public ResponseEntity<?> test(){
+
+        return ResponseEntity.ok().body(couponService.findAllByEndDateBetweenToday());
+    }
 
 
 

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 
 @Repository
-public interface UserCouponRepository extends JpaRepository<UserCoupon,String> {
+public interface UserCouponRepository extends JpaRepository<UserCoupon,String> , UserCouponCustomRepository {
 
     Optional<UserCoupon> findById(String id);
 
