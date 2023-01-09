@@ -14,9 +14,9 @@
 - 쿠폰 만료일 1일전 알림 배치
 
 ### 프로젝트 정의
-- common-coupon : 공통 dto, entity
-- api-coupon    : api , kafka publishing , db read
-- kafka-coupon  : kafka consume , db write
+- coupon-common : 공통 dto, entity
+- coupon-api    : api , kafka publishing , db read
+- coupon-kafka  : kafka consume , db write
 
 ### 성능테스트 목표
 - TPS 10만건
