@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="USER_COUPON")
+@Table(name="user_coupon")
 @Builder
 @Getter
 @Setter
@@ -20,10 +20,9 @@ public class UserCouponEntity {
 
     @Id
     private String id;
-    private String user_id;
-    private LocalDateTime issued_at;
-    private LocalDateTime used_at;
-
+    private String userId;
+    private LocalDateTime issuedAt;
+    private LocalDateTime usedAt;
     @Enumerated(value = EnumType.STRING)
     private CouponStatus status;
 
@@ -34,12 +33,12 @@ public class UserCouponEntity {
 
     public UserCouponResponseDto toResponseDto(){
         return UserCouponResponseDto.builder()
-                .user_id(user_id)
-                .issued_at(issued_at)
-                .c_name(coupon.getC_name())
+                .userId(userId)
+                .issuedAt(issuedAt)
+                .couponName(coupon.getCouponName())
                 .discount(coupon.getDiscount())
-                .start_dt(coupon.getStartDt())
-                .end_dt(coupon.getEndDt())
+                .startDt(coupon.getStartDt())
+                .endDt(coupon.getEndDt())
                 .build();
     }
 

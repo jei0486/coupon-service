@@ -77,7 +77,7 @@ Body 정보 :
 
     @Override
     public String generateValue(TimeAttackVO vo) {
-        return String.valueOf(vo.getUser_id());
+        return String.valueOf(vo.getUserId());
     }
 
     @Override

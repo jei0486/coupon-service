@@ -1,6 +1,7 @@
 package com.shoppingmall.domain.admin;
 
 import com.shoppingmall.dto.CouponRequestDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -8,7 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-public class AdminController {
+@RequiredArgsConstructor
+@RestController
+public class AdminCouponController {
+
+    private final AdminCouponService adminCouponService;
 
     //   @ApiOperation(value = "쿠폰 생성 (관리자)")
     @PostMapping(value = "/admin/coupon/create")
@@ -20,7 +25,7 @@ public class AdminController {
             return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
         }
 
-        //couponService.couponCreate(couponRequestDto);
+        adminCouponService.couponCreate(couponRequestDto);
 
         return ResponseEntity.ok().body("쿠폰정보가 생성되었습니다.");
     }

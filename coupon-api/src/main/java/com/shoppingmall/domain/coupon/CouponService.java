@@ -50,7 +50,7 @@ public class CouponService {
 
         TimeAttackVO vo = TimeAttackVO.builder()
                 .key(dto.getKey())
-                .user_id(dto.getUser_id())
+                .userId(dto.getUserId())
                 .build();
 
         Long cnt = timeAttackOperation.count(redisOperation, vo);
@@ -60,7 +60,7 @@ public class CouponService {
             result = timeAttackOperation.add(redisOperation, vo);
         }
 
-        log.info("result : {}",result == 1 ?successMsg:failMsg);
+        log.info("result : {}",result == 1 ?successMsg:"fail :: key is Duplicate in Redis");
 
         if (result == 1) {
             kafkaService.async("TimeAttackCouponIssue",mapper.writeValueAsString(dto));
@@ -77,7 +77,7 @@ public class CouponService {
 
         TimeAttackVO vo = TimeAttackVO.builder()
                 .key(dto.getKey())
-                .user_id(dto.getUser_id())
+                .userId(dto.getUserId())
                 .build();
 
         Long cnt = timeAttackOperation.count(redisOperation, vo);
@@ -145,10 +145,10 @@ public class CouponService {
         userCouponResponseDtoList.parallelStream()
                 .map(e ->
                         NotificationDto.builder()
-                                .user_id(e.getUser_id())
-                                .code(e.getC_name())
+                                .userId(e.getUserId())
+                                .code(e.getCouponName())
                                 .notificationMsg("쿠폰이 24시간후 만료됩니다.")
-                                .expiration(e.getEnd_dt())
+                                .expiration(e.getEndDt())
                                 .build())
                // .forEach(n -> producer.publish(topicName, n.getExpirationDate().getDayOfWeek().getValue(), n));
                 .forEach(n -> {

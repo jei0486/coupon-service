@@ -24,7 +24,7 @@ import static com.shoppingmall.entity.QUserCouponEntity.userCouponEntity;
 
 @RequiredArgsConstructor
 @Repository
-public class UserCouponRepositoryImpl implements  UserCouponRepository{
+public class UserCouponRepositoryImpl implements UserCouponRepository {
 
     private final JPAQueryFactory jpaQueryFactory;
 

@@ -66,9 +66,9 @@ Spring에서 컨테이너 팩토리는 KafkaListenerContainerFactory, Concurrent
 
             UserCouponEntity userCouponEntity = UserCouponEntity.builder()
                     .id(UUID.randomUUID().toString())
-                    .user_id(timeAttackVO.getUser_id())
+                    .userId(timeAttackVO.getUserId())
                     .coupon(coupon)
-                    .issued_at(LocalDateTime.now())
+                    .issuedAt(LocalDateTime.now())
                     .build();
 
             log.info("TimeAttackCouponIssue > userCouponEntity : {}",String.valueOf(userCouponEntity));

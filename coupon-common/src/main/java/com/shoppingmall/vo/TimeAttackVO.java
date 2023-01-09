@@ -10,5 +10,5 @@ import lombok.ToString;
 public class TimeAttackVO {
 
     String key;
-    String user_id;
+    String userId;
 }

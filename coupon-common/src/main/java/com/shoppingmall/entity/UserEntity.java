@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="USER_INFO")
+@Table(name="user_info")
 @Builder
 @Getter
 @Setter
@@ -20,7 +20,8 @@ public class UserEntity {
     @Id
     private String id;
     private String password;
-    private String name;
-    private LocalDateTime regDate;
-
+    private String userName;
+    private String state;
+    private LocalDateTime createAt;
+    private String loginId;
 }

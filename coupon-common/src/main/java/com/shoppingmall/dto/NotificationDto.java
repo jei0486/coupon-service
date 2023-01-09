@@ -13,5 +13,5 @@ public class NotificationDto {
     String code;
     String notificationMsg;
     LocalDateTime expiration;
-    String user_id;
+    String userId;
 }

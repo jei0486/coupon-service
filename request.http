@@ -1,0 +1,15 @@
+###
+# 쿠폰 발급
+POST http://localhost:8081/coupon/issued
+Content-Type: application/json
+
+{
+    "userId": "user_3",
+    "key": "coupon:time-attack:20:date-time:2:issued:users"
+}
+
+###
+# 쿠폰 리스트 보기
+GET http://localhost:8081/coupon
+
+###

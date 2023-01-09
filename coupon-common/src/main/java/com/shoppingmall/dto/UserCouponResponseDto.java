@@ -12,17 +12,13 @@ import java.time.LocalDateTime;
 @Data
 public class UserCouponResponseDto {
 
-    private String user_id;
-    private String c_name;
+    private String userId;
+    private String couponName;
     private Integer discount;
-    private char rate_yn;
-
-    private LocalDateTime start_dt;
-    private LocalDateTime end_dt;
-
-    private LocalDateTime issued_at;
-    private LocalDateTime used_at;
-
-
+    private char rateYn;
+    private LocalDateTime startDt;
+    private LocalDateTime endDt;
+    private LocalDateTime issuedAt;
+    private LocalDateTime usedAt;
 
 }

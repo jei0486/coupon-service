@@ -38,8 +38,8 @@ coupon:time-attack:1:date-time:1:issued:users 1
 # kafka message
 사용자가 소유한 쿠폰
 {
-policyId: 1,
-userId: 1
+   policyId: 1,
+   userId: 1
 }
 
 # Nosql (Redis)

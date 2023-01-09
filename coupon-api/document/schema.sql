@@ -1,42 +1,46 @@
+#################################################################
+#### MariaDB ####
+#################################################################
 /* 쿠폰 테이블 */
 CREATE TABLE `coupon_info` (
-`id` varchar(255) NOT NULL,
-`coupon_name` varchar(100), 	/* 쿠폰 이름 */
-`discount` int(20), 	       /* 할인율 혹은 할인되는 가격 */
-`created_at` datetime,
-`modified_at` datetime,
-`start_dt` datetime,
-`end_dt` datetime,
-`rate_yn` varchar(50), /* 가격 OR 할인율 */
-PRIMARY KEY (`id`)
+    `id` varchar(255) NOT NULL,
+    `coupon_name` varchar(100), 	/* 쿠폰 이름 */
+    `discount` int(20), 	       /* 할인율 혹은 할인되는 가격 */
+    `created_at` datetime,
+    `modified_at` datetime,
+    `start_dt` datetime,
+    `end_dt` datetime,
+    `rate_yn` varchar(50), /* 가격 OR 할인율 */
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /* 사용자 쿠폰 테이블 */
 CREATE TABLE `user_coupon`(
-`id` VARCHAR(255) NOT NULL,
-`policy_id` VARCHAR(1000), 	/* 쿠폰 아이디 */
-`user_id` VARCHAR(255), 	/* 사용자 아이디 */
-`issued_at` datetime,		/* 쿠폰 발행 시간 */
-`used_at` datetime,		    /* 쿠폰 사용 시간 */
-`status` VARCHAR(50),		/* 쿠폰 사용 여부 */
-PRIMARY KEY (`id`)
+    `id` VARCHAR(255) NOT NULL,
+    `policy_id` VARCHAR(1000), 	/* 쿠폰 아이디 */
+    `user_id` VARCHAR(255), 	/* 사용자 아이디 */
+    `issued_at` datetime,		/* 쿠폰 발행 시간 */
+    `used_at` datetime,		    /* 쿠폰 사용 시간 */
+    `status` VARCHAR(50),		/* 쿠폰 사용 여부 */
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /* 사용자 테이블 */
 CREATE TABLE `users` (
-`id` varchar(100) ,
-`login_id` varchar(100) ,
-`username` varchar(100) ,
-`password` varchar(255) ,
-`state` varchar(50) ,
-`created_at` datetime,
-PRIMARY KEY (`id`)
+    `id` varchar(100) ,
+    `login_id` varchar(100) ,
+    `username` varchar(100) ,
+    `password` varchar(255) ,
+    `state` varchar(50) ,
+    `created_at` datetime,
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #################################################################
-#### 오라클
+#### Oracle ####
+#################################################################
 /* 쿠폰 테이블 */
-CREATE TABLE "C##NSMALL"."COUPON_INFO"(
+CREATE TABLE "DEMO"."COUPON_INFO"(
 "ID" VARCHAR2(255 CHAR) NOT NULL ENABLE,
 "C_NAME" VARCHAR2(100), 	/* 쿠폰 이름 */
 "DISCOUNT" NUMBER(10), 	/* 할인율 혹은 할인되는 가격 */
@@ -60,9 +64,8 @@ BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
 TABLESPACE "USERS" ;
 
 
-
 /* 사용자 쿠폰 테이블 */
-CREATE TABLE "C##NSMALL"."USER_COUPON"(
+CREATE TABLE "DEMO"."USER_COUPON"(
 "ID" VARCHAR2(255 CHAR) NOT NULL ENABLE,
 "POLICY_ID" VARCHAR2(1000), 	/* 쿠폰 아이디 */
 "USER_ID" VARCHAR2(255 CHAR), 			/* 사용자 아이디 */
@@ -83,4 +86,3 @@ PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
 TABLESPACE "USERS" ;
 
-#################################################################

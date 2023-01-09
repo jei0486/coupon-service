@@ -4,14 +4,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+
 @ToString
 @Getter
 @Builder
 public class CouponResponseDto {
-
-    private String c_name;
+    private String couponName;
+    private String startDt;
+    private String endDt;
+    private char rateYn;
     private Integer discount;
-    private String start_dt;
-    private String end_dt;
-    private char rate_yn;
 }
