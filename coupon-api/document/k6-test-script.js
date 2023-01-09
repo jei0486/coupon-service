@@ -2,8 +2,11 @@ import http from 'k6/http';
 import { sleep, check } from 'k6';
 
 /*
-쉘 명령어 입력
-k6 run --vus 1000 --duration 30s --out json=out.json post.js
+
+파일명 : k6-test-script.js
+
+쉘 명령어 입력 :
+k6 run --vus 1000 --duration 30s --out json=out.json k6-test-script.js
 */
 
 export default function () {
