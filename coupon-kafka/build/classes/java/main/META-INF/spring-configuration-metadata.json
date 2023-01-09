@@ -1,0 +1,72 @@
+{
+  "groups": [
+    {
+      "name": "spring.kafka",
+      "type": "com.shoppingmall.config.KafkaProperties",
+      "sourceType": "com.shoppingmall.config.KafkaProperties"
+    },
+    {
+      "name": "spring.kafka.consumer",
+      "type": "com.shoppingmall.config.KafkaProperties$Consumer",
+      "sourceType": "com.shoppingmall.config.KafkaProperties",
+      "sourceMethod": "getConsumer()"
+    },
+    {
+      "name": "spring.kafka.consumer.common-config",
+      "type": "com.shoppingmall.config.KafkaProperties$ConsumerCommonConfig",
+      "sourceType": "com.shoppingmall.config.KafkaProperties$Consumer",
+      "sourceMethod": "getCommonConfig()"
+    },
+    {
+      "name": "spring.kafka.consumer.time-attack-coupon-consumer-config",
+      "type": "com.shoppingmall.config.KafkaProperties$ConsumerConfig",
+      "sourceType": "com.shoppingmall.config.KafkaProperties$Consumer",
+      "sourceMethod": "getTimeAttackCouponConsumerConfig()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.kafka.consumer.common-config.bootstrap-servers",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.shoppingmall.config.KafkaProperties$ConsumerCommonConfig"
+    },
+    {
+      "name": "spring.kafka.consumer.common-config.client-id",
+      "type": "java.lang.String",
+      "sourceType": "com.shoppingmall.config.KafkaProperties$ConsumerCommonConfig"
+    },
+    {
+      "name": "spring.kafka.consumer.common-config.fetch-max-wait-ms",
+      "type": "java.lang.Integer",
+      "sourceType": "com.shoppingmall.config.KafkaProperties$ConsumerCommonConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.kafka.consumer.common-config.fetch-min-bytes",
+      "type": "java.lang.Integer",
+      "sourceType": "com.shoppingmall.config.KafkaProperties$ConsumerCommonConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.kafka.consumer.common-config.group-id",
+      "type": "java.lang.String",
+      "sourceType": "com.shoppingmall.config.KafkaProperties$ConsumerCommonConfig"
+    },
+    {
+      "name": "spring.kafka.consumer.common-config.timeout-ms",
+      "type": "java.lang.String",
+      "sourceType": "com.shoppingmall.config.KafkaProperties$ConsumerCommonConfig"
+    },
+    {
+      "name": "spring.kafka.consumer.time-attack-coupon-consumer-config.topic",
+      "type": "java.lang.String",
+      "sourceType": "com.shoppingmall.config.KafkaProperties$ConsumerConfig"
+    },
+    {
+      "name": "spring.kafka.default-bootstrap-servers",
+      "type": "java.lang.String",
+      "sourceType": "com.shoppingmall.config.KafkaProperties"
+    }
+  ],
+  "hints": []
+}
