@@ -14,6 +14,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'org.springframework.kafka:spring-kafka'
 
+
+	// model mapper
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	//runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'

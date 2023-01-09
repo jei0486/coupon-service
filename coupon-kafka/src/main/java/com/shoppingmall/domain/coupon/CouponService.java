@@ -1,12 +1,9 @@
-package com.shoppingmall.domain;
+package com.shoppingmall.domain.coupon;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shoppingmall.dto.CouponRequestDto;
-import com.shoppingmall.dto.CouponResponseDto;
-import com.shoppingmall.dto.UserCouponResponseDto;
-import com.shoppingmall.entity.CouponEntity;
-import com.shoppingmall.entity.UserCouponEntity;
+import com.shoppingmall.entity.Coupon;
+import com.shoppingmall.entity.UserCoupon;
 import com.shoppingmall.enums.CouponStatus;
 import com.shoppingmall.exception.NotExistCouponException;
 import com.shoppingmall.repository.CouponRepository;
@@ -16,15 +13,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.support.KafkaHeaders;
-import org.springframework.messaging.handler.annotation.Header;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -59,22 +51,23 @@ Spring에서 컨테이너 팩토리는 KafkaListenerContainerFactory, Concurrent
 
             String id = timeAttackVO.getKey();
 
-            CouponEntity coupon = couponRepository.findById(id)
+            Coupon coupon = couponRepository.findById(id)
                 .orElseThrow(() -> new NotExistCouponException("존재하지않는 쿠폰입니다."));
 
             log.info("TimeAttackCouponIssue > coupon : {}" , String.valueOf(coupon));
 
-            UserCouponEntity userCouponEntity = UserCouponEntity.builder()
+            UserCoupon userCoupon = UserCoupon.builder()
                     .id(UUID.randomUUID().toString())
                     .userId(timeAttackVO.getUserId())
-                    .coupon(coupon)
+                    .status(CouponStatus.PUBLISHED)
                     .issuedAt(LocalDateTime.now())
+                    .coupon(coupon)
                     .build();
 
-            log.info("TimeAttackCouponIssue > userCouponEntity : {}",String.valueOf(userCouponEntity));
+            log.info("TimeAttackCouponIssue > userCouponEntity : {}",String.valueOf(userCoupon));
 
             // user_coupon db write
-            userCouponRepository.save(userCouponEntity);
+            userCouponRepository.save(userCoupon);
 
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
@@ -85,5 +78,6 @@ Spring에서 컨테이너 팩토리는 KafkaListenerContainerFactory, Concurrent
     public void NotificationExpireCoupon(ConsumerRecord<String, String> consumerRecord) {
         log.info("NotificationExpireCoupon > ConsumerRecord : {}" , String.valueOf(consumerRecord));
     }
+
 
 }

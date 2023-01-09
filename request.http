@@ -4,8 +4,8 @@ POST http://localhost:8081/coupon/issued
 Content-Type: application/json
 
 {
-    "userId": "user_3",
-    "key": "coupon:time-attack:20:date-time:2:issued:users"
+    "userId": "user_16",
+    "key": "coupon:time-attack:1:date-time:1:issued:users"
 }
 
 ###

@@ -1,14 +1,10 @@
 package com.shoppingmall.dto;
 
-import com.shoppingmall.entity.UserCouponEntity;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@ToString
-@Getter
-@Builder
 @Data
 public class UserCouponResponseDto {
 

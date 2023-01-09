@@ -36,6 +36,16 @@ CREATE TABLE `users` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+## insert sql ##
+INSERT INTO coupon_info
+(id, coupon_name, discount, created_at , modified_at , start_dt, end_dt, rate_yn)
+VALUES('95be217a-a553-4f4f-88a4-f2dd58f14fd9', '복숭아 세일방송', 40, NOW(), NULL, '2023-01-02 13:57:20.286000', '2023-01-15 13:57:20.286000', 'Y');
+
+INSERT INTO coupon_info
+(id, coupon_name, discount, created_at , modified_at , start_dt, end_dt, rate_yn)
+VALUES('coupon:time-attack:1:date-time:1:issued:users', '복숭아 세일방송', 40, NOW(), NULL, '2023-01-02 13:57:20.286000', '2023-01-15 13:57:20.286000', 'Y');
+
+
 #################################################################
 #### Oracle ####
 #################################################################
@@ -86,3 +96,8 @@ PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
 TABLESPACE "USERS" ;
 
+## insert sql ##
+
+INSERT INTO "C##NSMALL".COUPON
+(ID, C_NAME, DISCOUNT, REG_DATE, MOD_DATE, START_DT, END_DT, RATE_YN)
+VALUES('95be217a-a553-4f4f-88a4-f2dd58f14fd9', '복숭아 세일방송', 40, TIMESTAMP '2022-07-19 13:57:20.286000', NULL, TIMESTAMP '2022-07-30 13:57:20.286000', TIMESTAMP '2022-07-30 13:57:20.286000', 'Y');

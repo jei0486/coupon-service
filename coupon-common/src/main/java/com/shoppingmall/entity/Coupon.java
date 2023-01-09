@@ -7,15 +7,17 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name="coupon_info")
-@Builder
 @Getter
 @Setter
+@Builder
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
-public class CouponEntity {
+@NoArgsConstructor
+public class Coupon {
+
 
     @Id
+    @Column(name="coupon_info_id")
     private String id;      // UUID
     private String couponName; // 쿠폰 이름
     private int discount; // 할인율 혹은 할인되는 가격
